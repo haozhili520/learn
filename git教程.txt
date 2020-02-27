@@ -1,0 +1,30 @@
+【第一次新建git仓库】
+1、需要提交到github的文件夹上点击右键：点击 Git Base Here
+2、克隆到本地：输入git clone +线上地址
+3、输入cd +出现的目录进入到该目录下，比如这里cd Animation
+
+4、输入git add .按回车将Animation目录下的文件都添加进来，注意add和.需要隔开
+
+5、输入git commit -m "第一次提交"按回车来添加提交信息，在这里需要根据提示添加本地git用户的邮箱和名称
+git config --global user.email "xxxxxxxxx@qq.com"
+git config --global user.name "SmallYQ"
+
+6、输入git remote add orgin +我们创建仓库复制的连接进行和仓库远程连接
+
+7、输入git push -u orgin master 这个操作是将本地项目push到仓库，这里会要求用户输入github的账号和密码
+
+作者
+
+【删除仓库文件或者目录】
+1、git rm -r --cached 需要删除的目录或者文件
+2、$ git commit -m "删除说明"
+3、$ git push
+
+
+【常规修改后更新】
+1、git fetch --all
+2、git rebase（合并）
+3、git add .(有修改的文件添加到本地git)
+4、git commit -m '1.0V版本  (提交到本地仓库，记录提交信息5)
+5、先看一下状态，版本领先可以提交push  git status
+6、git push（提交到线上仓库）

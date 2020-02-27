@@ -1,0 +1,127 @@
+-----------------------------修改root密码------------------------------
+1、查看当前用户 whoami
+2、命令 passwd  
+3、输入密码，再重复
+
+-----------------------------复制------------------------------
+1、将一个文件夹下面所有的内容复制另一个文件夹  cp -r /目录/目标文件夹/* /目录/目标文件夹
+2、重命名：mv A B
+
+1、查看文件夹下各个文件夹的大小命令：du -sh *|sort -n
+2、查询nginx主进程号 ps -ef | grep nginx
+
+-----------------------------php------------------------------
+1、重启php 命令：/etc/init.d/php-fpm restart
+2、重启PHP 命令：service php-fpm restart
+3、修改php配置文件 
+4、查看php扩展 php -m
+------------------workerman------------------------------------
+1、安装：composer require workerman/workerman
+
+
+-----------------------------mysql------------------------------
+
+3、查询mysql的所有用户SELECT User, Host, Password FROM mysql.user;
+4、mysql创建数据库：create database db_resn_cn;
+5、修改mysql某个用户的密码：update user set password=passworD("hao147147") where user='zby_new_server';
+6、创建新用户：CREATE USER 'john'@'192.168.189.71' IDENTIFIED BY "123";
+
+7、导入mysql文件到数据库
+mysql> use '数据库名';
+mysql> source sql文件路径;  
+
+8、修改用户密码
+mysql> use mysql;
+mysql> UPDATE user SET password=password("test123") WHERE user='root';   
+mysql> flush privileges;
+mysql> exit;  
+
+7、给用户给权限，第一步 use mysql；第二步：grant all privileges on *.* to hao@'%' identified by 'hao147147';然后给权限flush privileges;
+8、查看mysql默认端口号：show global variables like 'port'; 
+9、mysql重启：service mysqld restart
+
+10删除用户：Delete FROM user Where User='test' and Host='localhost';然后：flush privileges;drop user 用户名@'%';
+
+-----------------------------vi模式------------------------------
+1、搜索  用/关键词
+
+
+—————————————— 防火墙————————————————
+1、防火墙位置 vi /etc/sysconfig/iptables
+2、防火墙允许3306被外部访问：-A INPUT -m state --state NEW -m tcp -p tcp --dport 3306 -j ACCEPT
+3、允许2345端口访问：iptables -I INPUT -p tcp --dport 2345 -j ACCEPT
+4、保存防火墙设置：/etc/init.d/iptables save
+
+
+
+---------------------------解决mysql函数不能放入的方法-------------------
+修改mysql配置文件，在[mysqld]  最后加上 一句：log-bin-trust-function-creators=1
+然后service重启mysql：service mysqld restart
+
+
+
+—————————————— 定时脚本————————————————
+
+定时脚本
+
+1、查看当前自动定时任务crontab -l
+2、查看crontab是否启动 service crond status
+3、编辑定时文件
+4、查看某个定时日志文件 tail -f /tmp/log_ss.txt
+4、添加定制脚本文件到crontab中，命令：crontab -e
+
+
+
+—————————————— 文件压缩————————————————
+1、unzip 压缩文件
+
+
+—————————————— 文件大小————————————————
+1、查看文件大小 du -ha 文件夹名称
+2、磁盘容量：df -h
+3、查看目录大小du -sh 目录名称
+4、统计当前目录大小 du -sm * 并排序
+
+
+----------------------------限制IP-----------------------------------
+1、配置文件位置 vi /etc/sysconfig/iptables
+2、-A INPUT -p tcp -m tcp --dport 22 -s 27.17.187.26 -j ACCEPT    （有几个信任IP就用几个信任IP）
+-A INPUT -s 123.206.177.161 -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -s 115.159.63.219 -p tcp -m tcp --dport 22 -j ACCEPT
+-A INPUT -s 123.57.70.56 -p tcp -m tcp --dport 22 -j ACCEPT
+
+3、/etc/init.d/iptables restart
+4、查看是否生效    iptables -nL
+5、查看TCP等网络连接状态  netstat -antlup
+123.206.177.161 的IP控制脚本 在   root   .script/iptables.sh
+
+
+
+--------------------------FTP--------------------------------
+1、服务器位置 /etc/vsftpd/
+2、配置文件：
+3、重启命令：service vsftpd restart
+chroot_local_user #是否将所有用户限制在主目录,YES为启用 NO禁用
+chroot_list_enable #是否启动限制用户的名单 YES为启用  NO禁用(包括注释掉也为禁用)
+chroot_list文件存放被闲置当前目录的用户
+
+—————————————— php————————————————
+
+重启php:service php-fpm restart
+
+
+123.206.177.161服务器nginx重启
+①pkill -9 nginx
+②/usr/local/nginx/sbin/nginx
+
+
+—————————————— redis————————————————
+1、进入redis数据库：redis-cli
+2、查看redis储存内容:scan 0
+3、查看储存数据的类型 type key的名称，举例：type queues:helloJobQueue  结果：list
+4、查看list类型的数据 LRANGE queues:helloJobQueue 0 0，其中0 0分别为开始和结束的角标
+
+——————————————xshell下载文件————————————————
+1、安装下载软件yum -y install lrzsz
+2、sz 对应文件名
+

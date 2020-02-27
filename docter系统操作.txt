@@ -1,0 +1,5 @@
+1、进入系统：docker exec -it c bash
+2、没有mysql命令:source /etc/profile
+3、mysql数据位置：/opt/mysqldata/
+4、网站目录位置：/usr/local/nginx/html/
+5、nginx配置文件：/usr/local/nginx/conf/nginx.conf

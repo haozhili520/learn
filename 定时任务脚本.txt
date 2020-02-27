@@ -1,0 +1,10 @@
+#!/bin/bash
+#set -x
+USER="dev147"
+PORT="3306"
+HOST="127.0.0.1"
+PASSWORD="hao147147"
+echo "Update order status start ..." >> /tmp/update_order.log
+echo `date +%Y%m%d%H%M%S` >> /tmp/update_order.log
+#tee /tmp/update_order.log
+/usr/local/mysql/bin/mysql -h$HOST -u$USER -p$PASSWORD -e 'UPDATE bowenjia.mer_order SET status=41,updated_at=NOW() WHERE (`status`=34 OR `status`=35) AND (UNIX_TIMESTAMP(`updated_at`)+1296000<UNIX_TIMESTAMP(NOW()));'
